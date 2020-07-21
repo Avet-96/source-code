@@ -6,7 +6,6 @@ class JoinUsContainer extends Component {
 
             <div className="join-us-container bg-reverse-gred">
                 <div className="row align-items-center">
-
                     <div className="col-md-6">
                         <div className="join-us-content">
                             <h5>

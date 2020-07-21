@@ -5,6 +5,18 @@ import logo from '../../assets/images/logo.png'
 import {Link} from "react-router-dom";
 
 class NavBar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpen: false
+        }
+    }
+
+    handelClick = (e) => {
+        this.setState({isOpen: !this.state.isOpen})
+        console.log(e.target)
+    }
+
     render() {
         return (
             <nav className="navbar navbar-expand-lg">
@@ -16,17 +28,24 @@ class NavBar extends Component {
                             <img src={logo} alt="Letstart"/>
                         </Link>
 
-                        <button className="navbar-toggler collapsed" type="button"
+                        <button className={!this.state.isOpen
+                            ? "navbar-toggler collapsed"
+                            : "navbar-toggler"}
+                                type="button"
                                 data-toggle="collapse" data-target="#navbarNav"
-                                aria-controls="navbarNav" aria-expanded="false"
-                                aria-label="Toggle navigation">
+                                aria-controls="navbarNav" aria-expanded={this.state.isOpen}
+                                aria-label="Toggle navigation"
+                                onClick={e => this.handelClick(e)}
+                        >
                             <span/>
                             <span/>
                             <span/>
                         </button>
                     </div>
 
-                    <DataScrollMenu/>
+                    <DataScrollMenu
+                        openModal={this.state.isOpen}
+                    />
                 </div>
             </nav>
         );

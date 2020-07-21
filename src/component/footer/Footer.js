@@ -5,7 +5,8 @@ import FooterText from "./footer=pages/FooterText";
 class Footer extends Component {
     render() {
         return (
-            <footer className="footer theme-1" data-scroll-index="7">
+            <footer id='#footer'
+                className="footer theme-1" data-scroll-index="7">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 mx-auto">

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import {openModal} from "../../../store/action/loginAndRegistration";
+import {connect} from "react-redux";
 
 
 let text = ["Web development", "Mobile development", "Web and mobile design"]
@@ -12,7 +14,8 @@ class HomeBannerText extends Component {
             noStatWidth: 0,
             isWith: true,
             textId: 1,
-            texts: ''
+            texts: '',
+            openModal: false
         }
     }
 
@@ -39,8 +42,8 @@ class HomeBannerText extends Component {
         }, 160)
     }
 
-    render() {
 
+    render() {
         return (
             <div className="row">
                 <div className="col-md-10 col-lg-8 mx-auto" data-aos="fade-up" data-aos-duration="600"
@@ -48,17 +51,21 @@ class HomeBannerText extends Component {
 
                     <div className="home-content">
                         <h1 className="extra-large-heading">
-                            <span className="font-weight-extralight"></span>Source Code <br/> We have
+                            <span className="font-weight-extralight"/>Source Code <br/> We have
                             solution for all your needs!<br/><span>{this.state.texts}|</span>
                         </h1>
                         <div className="clearfix mt-30">
-                            <Link to="#" className="btn btn-outline-white mr-2" data-toggle="modal"
-                                  data-target="#getstarted">
+                            <button
+                                className="btn btn-outline-white mr-2"
+                                data-toggle="modal"
+                                data-target="#getstarted"
+                                onClick={() => this.props.openModal(true)}
+                            >
                                 Start now
-                            </Link>
-                            <Link to="#" className="btn btn-white">
+                            </button>
+                            <button className="btn btn-white">
                                 Read more
-                            </Link>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -69,4 +76,15 @@ class HomeBannerText extends Component {
 
 }
 
-export default HomeBannerText;
+const mapStateToProps = (state) => ({
+    bool: state.loginAndRegistration.bool
+})
+const mapDispatchToProps = {
+    openModal
+}
+const Container = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HomeBannerText)
+
+export default Container

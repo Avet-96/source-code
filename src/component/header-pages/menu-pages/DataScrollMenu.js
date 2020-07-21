@@ -1,23 +1,88 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
+import {buttons, scrollData} from "../../../data/foolData";
+import {dataScrollTop} from "../../../store/action/loginAndRegistration";
+import {connect} from "react-redux";
+
+let id = null
+let isTop = true
+let click = true
 
 class DataScrollMenu extends Component {
-    render() {
-        return (
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <div className="navbar-nav ml-auto align-items-center">
-                    <Link className="scroll-item nav-link active" data-scroll-nav="0" to="#home">Home</Link>
-                    <Link className="scroll-item nav-link" data-scroll-nav="1" to="#about-us">About us</Link>
-                    <Link className="scroll-item nav-link" data-scroll-nav="2" to="#works">Protfolio</Link>
-                    <Link className="scroll-item nav-link" data-scroll-nav="4" to="#pricing">Training center</Link>
-                    <Link className="scroll-item nav-link" data-scroll-nav="5" to="#team">Our team</Link>
+    constructor(props) {
+        super(props);
+        this.state = {
+            scroll: 0,
+            name: '',
 
-                    <Link className="scroll-item nav-link" data-scroll-nav="7" to="#contact-us">Contact us</Link>
-                    <span className="menu-arrow"></span>
+        }
+    }
+
+    goToPage = (e) => {
+        if (click) {
+            window.scrollY >= scrollData[e.target.name] ? isTop = true : isTop = false
+            Object.keys(scrollData).forEach(v => {
+                if (v === e.target.name) {
+                    id = setInterval(() => {
+                        window.scrollTo(0, isTop
+                            ? window.scrollY - 150
+                            : window.scrollY + 150
+                        )
+                        this.setState({scroll: window.scrollY, name: v})
+                    }, 8)
+                }
+            })
+            buttons.forEach(v => v.name === e.target.name ? v.clN = 'scroll-item nav-link active' : v.clN = 'scroll-item nav-link')
+
+        }
+        click = false
+    }
+
+    render() {
+        if (isTop) {
+            if (this.state.scroll <= scrollData[this.state.name]) {
+                clearInterval(id)
+                click = true
+            }
+        } else {
+            if (this.state.scroll >= scrollData[this.state.name]) {
+                clearInterval(id)
+                click = true
+            }
+        }
+
+        return (
+            <div className={this.props.openModal ?
+                "collapse navbar-collapse " :
+                "collapse navbar-collapse show"
+            }
+                 id="navbarNav">
+                <div className="navbar-nav ml-auto align-items-center">
+                    {buttons.map(v =>
+                        <button
+                            key={v.id}
+                            style={v.style}
+                            className={v.clN}
+                            data-scroll-nav={v.dsn}
+                            name={v.name}
+                            onClick={e => this.goToPage(e)}
+                        >
+                            {v.title}
+                        </button>
+                    )}
+                    <span className="menu-arrow"/>
                 </div>
             </div>
         );
     }
 }
 
-export default DataScrollMenu;
+const mapStateToProps = (state) => ({
+    name: state.loginAndRegistration.name
+})
+const mapDispatchToProps = {}
+const Container = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(DataScrollMenu)
+
+export default Container

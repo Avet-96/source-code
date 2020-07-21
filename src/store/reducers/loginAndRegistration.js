@@ -1,8 +1,13 @@
-import {USER_LOGIN_SUCCESS, USER_REGISTRATION_SUCCESS} from "../action/loginAndRegistration";
+import {
+    OPEN_MODAL,
+    USER_LOGIN_SUCCESS,
+    USER_REGISTRATION_SUCCESS
+} from "../action/loginAndRegistration";
 
 const initialState = {
     loginData: [],
     registrationData: [],
+    bool: false
 }
 export default function reducers(state = initialState, action) {
     switch (action.type) {
@@ -11,6 +16,9 @@ export default function reducers(state = initialState, action) {
         }
         case USER_REGISTRATION_SUCCESS: {
             return {registrationData: [...action.payload]}
+        }
+        case OPEN_MODAL: {
+            return {bool: action.payload}
         }
         default :
             return {...state}

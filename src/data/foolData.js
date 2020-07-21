@@ -22,6 +22,9 @@ import Members from "../component/home-pages/Members";
 import ContactUs from "../component/home-pages/ContactUs";
 import ContactUsSection from "../component/home-pages/ContactUsSection";
 import Footer from "../component/footer/Footer";
+import Home from "../component/Home";
+import Login from "../component/ligin-registration/Login";
+import Registration from "../component/ligin-registration/Registration";
 
 export const foolData = {
     outerStepData: [
@@ -323,7 +326,6 @@ export const foolData = {
 }
 
 export const components = [
-    NavBar,
     HomeBanner,
     AboutUs,
     OurSteps,
@@ -333,5 +335,79 @@ export const components = [
     Members,
     ContactUs,
     ContactUsSection,
-    Footer
+]
+
+export const routingComponents = {
+    home: {
+        component: Home,
+        path: '/',
+    },
+    login: {
+        component: Login,
+        path: '/login'
+    },
+    registration: {
+        component: Registration,
+        path: '/registration'
+    }
+}
+
+export const scrollData = {
+    home: 0,
+    about_us: 1000,
+    profile: 2766.25,
+    training_center: 3733.75,
+    outer_teams: 6270,
+    contact_us: 7595,
+}
+
+export const buttons = [
+    {
+        id: 0,
+        style: {cursor: 'pointer'},
+        name: 'home',
+        title: 'Home',
+        dsn: 0,
+        clN: 'scroll-item nav-link active'
+    },
+    {
+        id: 1,
+        style: {cursor: 'pointer'},
+        name: 'about_us',
+        title: 'About us',
+        dsn: 1,
+        clN: 'scroll-item nav-link'
+    },
+    {
+        id: 2,
+        style: {cursor: 'pointer'},
+        name: 'profile',
+        title: ' Protfolio',
+        dsn: 2,
+        clN: 'scroll-item nav-link'
+    },
+    {
+        id: 3,
+        style: {cursor: 'pointer'},
+        name: 'training_center',
+        title: 'Training center',
+        dsn: 4,
+        clN: 'scroll-item nav-link'
+    },
+    {
+        id: 4,
+        style: {cursor: 'pointer'},
+        name: 'outer_teams',
+        title: 'Our team',
+        dsn: 5,
+        clN: 'scroll-item nav-link'
+    },
+    {
+        id: 5,
+        style: {cursor: 'pointer'},
+        name: 'contact_us',
+        title: 'Contact us',
+        dsn: 7,
+        clN: 'scroll-item nav-link'
+    },
 ]

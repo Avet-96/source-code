@@ -18,3 +18,10 @@ export function userRegistrationRequest(data) {
     }
 }
 
+export const OPEN_MODAL ='OPEN_MODAL'
+
+export function openModal(bool){
+    return{
+        type:OPEN_MODAL , payload:bool
+    }
+}
